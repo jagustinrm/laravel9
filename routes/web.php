@@ -31,6 +31,11 @@ Route::view('/contact', 'contact') ->name('contact');
 // // Crear un controlador en la terminal: 'php artisan make:controller PostController (control vacío)
 
 
-Route::get('/blog', [PostController::class, 'index'])->name('blog');
-
+Route::get('/blog', [PostController::class, 'index'])->name('posts.index');
+// para que funcione index y show hay que crear el método en el controlador
+// hay que utilizar parámetros de rutas, con llaves simples ni el signo $
+// {post} acepta cualquier variable
+Route::get('/blog/create', [PostController::class, 'create'])->name('posts.create');
+Route::post('blog/create', [PostController::class, 'store'])->name('posts.store');
+Route::get('/blog/{post}', [PostController::class, 'show'])->name('posts.show');
 Route::view('/about', 'about')->name('about');
