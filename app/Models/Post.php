@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+    // protected $fillable = ['title', 'body'];    Si lo ponemos así solo los campos del array pueden pasar
+      //de esta manera pasan todos, pero hay que controlarlo antes. Nunca pasarlos con el método all()
+    // protected $guarded = []; 
 }
 
 // IMPORTANTE: Con php artisan make:model Post -m  

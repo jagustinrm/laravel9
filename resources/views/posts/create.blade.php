@@ -3,22 +3,7 @@
 
     <form method="POST" action="{{route('posts.store')}}"> 
         @csrf
-        <label>
-            Title <br>
-            <input name="title" type="text" value="{{old('title')}}">
-        </label> 
-        @error('title')
-        <br>
-        <small style="color: red">{{$message}} </small>
-        @enderror
-        <br>
-        <label>
-            Body <br>
-            <textarea name="body" >{{old('body')}}</textarea>
-        @error('body')
-        <small style="color: red">{{$message}} </small>
-        @enderror
-        </label> <br>
+        @include('posts.form-fields')
         <button type="submit">Enviar</button>
         <br>
     </form>
