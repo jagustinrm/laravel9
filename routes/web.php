@@ -1,5 +1,7 @@
 <?php
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 // EJEMPLO 1 BLOG   
 // $posts = [
@@ -23,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', "welcome")-> name('welcome');
 
-Route::view('/contact', 'contact') ->name('contact');
+Route::view('/contact', 'contact') ->name('contact')-> middleware('auth');
 
 // Crear un controlador en la terminal: 'php artisan make:controller PostController -i (invocable en este caso)
 // Crear un controlador en la terminal: 'php artisan make:controller PostController -r (resource, que contendrá los 7 métodos REST)
@@ -56,3 +58,10 @@ Route::resource('blog', PostController::class, [
 
 
 Route::view('/about', 'about')->name('about'); 
+
+Route::view('/login', 'auth.login')->name('login');
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+Route::view('/register', 'auth.register')->name('register');
+// Lo que está entre corchetes es un controlador. php artisan make: controller Auth/RegisteredUserController
+Route::post('/register', [RegisteredUserController::class, 'store']);

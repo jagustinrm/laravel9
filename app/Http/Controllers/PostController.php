@@ -7,6 +7,15 @@ use Illuminate\Support\Facades\DB;
 
     // MIGRACIONES: clases de php que nos permiten recrear esquemas de base de datos. 
  class PostController extends Controller {
+
+public function __construct() {
+  //Esta función constructora permite que se exija login excepto en el login y show 
+  $this->middleware('auth', ['except' => ['index', 'show']]);
+}
+
+
+
+
    public function index() {
 
      $posts = Post::get();
